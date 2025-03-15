@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mariobj99dev.Economy.infrastructure.dependency.PluginModule;
 import org.mariobj99dev.Economy.infrastructure.persistence.database.DatabaseConnection;
+import org.mariobj99dev.Economy.presentation.commands.GetAllBanksCommand;
 import org.mariobj99dev.Economy.presentation.commands.GetAllCurrenciesCommand;
 
 public final class Main extends JavaPlugin {
@@ -17,9 +18,11 @@ public final class Main extends JavaPlugin {
 
         injector = Guice.createInjector(new PluginModule(this));
 
-
         GetAllCurrenciesCommand getAllCurrenciesCommand = injector.getInstance(GetAllCurrenciesCommand.class);
+        GetAllBanksCommand getAllBanksCommand = injector.getInstance(GetAllBanksCommand.class);
+
         getCommand("getcurrencies").setExecutor(getAllCurrenciesCommand);
+        getCommand("getbanks").setExecutor(getAllBanksCommand);
     }
 
     @Override
