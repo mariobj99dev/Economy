@@ -9,6 +9,7 @@ import org.mariobj99dev.Economy.presentation.commands.GetAllCurrenciesCommand;
 
 public final class Main extends JavaPlugin {
 
+    //Rename master to main branch
     private Injector injector;
 
     @Override
