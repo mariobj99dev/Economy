@@ -7,6 +7,7 @@ import org.mariobj99dev.Economy.infrastructure.dependency.PluginModule;
 import org.mariobj99dev.Economy.infrastructure.persistence.database.DatabaseConnection;
 import org.mariobj99dev.Economy.presentation.commands.GetAllBanksCommand;
 import org.mariobj99dev.Economy.presentation.commands.GetAllCurrenciesCommand;
+import org.mariobj99dev.Economy.presentation.commands.GetBankCommand;
 
 public final class Main extends JavaPlugin {
 
@@ -20,9 +21,12 @@ public final class Main extends JavaPlugin {
 
         GetAllCurrenciesCommand getAllCurrenciesCommand = injector.getInstance(GetAllCurrenciesCommand.class);
         GetAllBanksCommand getAllBanksCommand = injector.getInstance(GetAllBanksCommand.class);
+        GetBankCommand getBankCommand = injector.getInstance(GetBankCommand.class);
 
         getCommand("getcurrencies").setExecutor(getAllCurrenciesCommand);
         getCommand("getbanks").setExecutor(getAllBanksCommand);
+        getCommand("getbank").setExecutor(getBankCommand);
+
     }
 
     @Override

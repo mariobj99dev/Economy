@@ -4,10 +4,14 @@ main: org.mariobj99dev.Economy.Main
 api-version: '1.21'
 commands:
   getcurrencies:
-    description: Obtiene información de todas las divisas.
-    usage: /getcurrencies
-    permission: economyapi.getcurrencies
+    description: "Obtiene información de todas las divisas."
+    usage: "/getcurrencies"
+    permission: "economyapi.getcurrencies"
   getbanks:
-    description: Obtiene información de todos los bancos.
-    usage: /getbanks
-    permission: economyapi.getbanks
+    description: "Obtiene información de todos los bancos."
+    usage: "/getbanks"
+    permission: "economyapi.getbanks"
+  getbank:
+    description: "Muestra información de un banco"
+    usage: "/getbank <id>"
+    permission: "economy.getbank"

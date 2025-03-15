@@ -6,6 +6,7 @@ import com.google.inject.Singleton;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mariobj99dev.Economy.application.usecases.GetAllBanksUseCase;
 import org.mariobj99dev.Economy.application.usecases.GetAllCurrenciesUseCase;
+import org.mariobj99dev.Economy.application.usecases.GetBankByIdUseCase;
 import org.mariobj99dev.Economy.domain.repositories.BankRepository;
 import org.mariobj99dev.Economy.domain.repositories.CurrencyRepository;
 import org.mariobj99dev.Economy.infrastructure.persistence.database.DatabaseConnection;
@@ -13,6 +14,7 @@ import org.mariobj99dev.Economy.infrastructure.persistence.repositories.BankRepo
 import org.mariobj99dev.Economy.infrastructure.persistence.repositories.CurrencyRepositoryImpl;
 import org.mariobj99dev.Economy.presentation.commands.GetAllBanksCommand;
 import org.mariobj99dev.Economy.presentation.commands.GetAllCurrenciesCommand;
+import org.mariobj99dev.Economy.presentation.commands.GetBankCommand;
 
 public class PluginModule extends AbstractModule {
     private final JavaPlugin plugin;
@@ -30,9 +32,11 @@ public class PluginModule extends AbstractModule {
 
         bind(GetAllCurrenciesUseCase.class);
         bind(GetAllBanksUseCase.class);
+        bind(GetBankByIdUseCase.class);
+
         bind(GetAllCurrenciesCommand.class);
         bind(GetAllBanksCommand.class);
-
+        bind(GetBankCommand.class);
     }
 
     @Provides
