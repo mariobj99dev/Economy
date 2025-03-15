@@ -1,0 +1,9 @@
+name: Economy
+version: '1.0-SNAPSHOT'
+main: org.mariobj99dev.Economy.Main
+api-version: '1.21'
+commands:
+  getcurrencies:
+    description: Obtiene información de todas las divisas.
+    usage: /getcurrencies
+    permission: economyapi.getcurrencies
