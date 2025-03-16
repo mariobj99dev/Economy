@@ -50,7 +50,7 @@ public class UpdateGUI {
 
             CurrencyDTO updatedCurrency = new CurrencyDTO(
                     currency.id,
-                    fieldToUpdate.equalsIgnoreCase("nombre") ? newValue : currency.name,
+                    fieldToUpdate.equalsIgnoreCase("NOMBRE") ? newValue : currency.name,
                     fieldToUpdate.equalsIgnoreCase("símbolo") ? newValue : currency.symbol,
                     fieldToUpdate.equalsIgnoreCase("tipo de cambio") ? Float.parseFloat(newValue) : currency.exchangeRate,
                     fieldToUpdate.equalsIgnoreCase("tasa de inflación") ? Float.parseFloat(newValue) : currency.inflationRate,
