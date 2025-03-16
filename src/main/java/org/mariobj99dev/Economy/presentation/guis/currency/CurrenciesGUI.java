@@ -5,6 +5,7 @@ import com.github.stefvanschie.inventoryframework.gui.type.ChestGui;
 import com.github.stefvanschie.inventoryframework.pane.OutlinePane;
 import com.github.stefvanschie.inventoryframework.pane.PaginatedPane;
 import com.github.stefvanschie.inventoryframework.pane.StaticPane;
+import com.google.inject.Inject;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
 import org.bukkit.Material;
@@ -17,6 +18,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CurrenciesGUI {
+    private final CurrencyGUI currencyGUI;
+
+    @Inject
+    public CurrenciesGUI(CurrencyGUI currencyGUI) {
+        this.currencyGUI = currencyGUI;
+    }
+
     public void openGUI(Player player, List<CurrencyDTO> currencies) {
         ChestGui gui = new ChestGui(6, "Currencies");
         PaginatedPane pages = new PaginatedPane(0, 0, 9, 5);
@@ -33,17 +41,20 @@ public class CurrenciesGUI {
     private List<GuiItem> getPageItems(List<CurrencyDTO> currencies, Player player) {
         List<GuiItem> items = new ArrayList<>();
 
-        for (CurrencyDTO CurrencyDTO : currencies) {
+        for (CurrencyDTO currency : currencies) {
             List<Component> lore = List.of(
-                    Component.text("🏷️ Id: ", NamedTextColor.YELLOW).append(Component.text(CurrencyDTO.id, NamedTextColor.GRAY)),
-                    Component.text("🔑 Name: ", NamedTextColor.YELLOW).append(Component.text(CurrencyDTO.name, NamedTextColor.GRAY)),
-                    Component.text("⚙️ Symbol: ", NamedTextColor.YELLOW).append(Component.text(CurrencyDTO.symbol, NamedTextColor.GRAY)),
-                    Component.text("🙍🏻 Exchange Rate: ", NamedTextColor.YELLOW).append(Component.text(CurrencyDTO.exchangeRate, NamedTextColor.GRAY)),
-                    Component.text("🏦 Inflation Rate: ", NamedTextColor.YELLOW).append(Component.text(CurrencyDTO.inflationRate, NamedTextColor.GRAY)),
-                    Component.text("💰 Created At: ", NamedTextColor.YELLOW).append(Component.text(String.valueOf(CurrencyDTO.createdAt), NamedTextColor.GREEN))
+                    Component.text("🏷️ Id: ", NamedTextColor.YELLOW).append(Component.text(currency.id, NamedTextColor.GRAY)),
+                    Component.text("🔑 Name: ", NamedTextColor.YELLOW).append(Component.text(currency.name, NamedTextColor.GRAY)),
+                    Component.text("⚙️ Symbol: ", NamedTextColor.YELLOW).append(Component.text(currency.symbol, NamedTextColor.GRAY)),
+                    Component.text("🙍🏻 Exchange Rate: ", NamedTextColor.YELLOW).append(Component.text(currency.exchangeRate, NamedTextColor.GRAY)),
+                    Component.text("🏦 Inflation Rate: ", NamedTextColor.YELLOW).append(Component.text(currency.inflationRate, NamedTextColor.GRAY)),
+                    Component.text("💰 Created At: ", NamedTextColor.YELLOW).append(Component.text(String.valueOf(currency.createdAt), NamedTextColor.GREEN))
             );
 
-            items.add(ItemFactory.createItem(Material.SUNFLOWER, CurrencyDTO.name, lore));
+            items.add(ItemFactory.createItem(Material.SUNFLOWER, currency.name, lore, event -> {
+                event.setCancelled(true);
+                currencyGUI.openGUI(player, currency);
+            }));
         }
 
         return items;

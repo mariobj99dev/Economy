@@ -1,25 +1,22 @@
-package org.mariobj99dev.Economy.application.usecases;
-
+package org.mariobj99dev.Economy.application.usecases.currency;
 
 import com.google.inject.Inject;
 import org.mariobj99dev.Economy.application.dto.CurrencyDTO;
 import org.mariobj99dev.Economy.domain.models.Currency;
 import org.mariobj99dev.Economy.domain.repositories.CurrencyRepository;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
-public class GetAllCurrenciesUseCase {
+public class GetCurrencyByIdUseCase {
     private final CurrencyRepository currencyRepository;
 
     @Inject
-    public GetAllCurrenciesUseCase(CurrencyRepository currencyRepository) {
+    public GetCurrencyByIdUseCase(CurrencyRepository currencyRepository) {
         this.currencyRepository = currencyRepository;
     }
 
-    public List<CurrencyDTO> execute() {
-        List<Currency> currencies = currencyRepository.getAllCurrencies();
-        return currencies.stream()
+    public Optional<CurrencyDTO> execute(int id) {
+        return currencyRepository.getCurrencyById(id)
                 .map(currency -> new CurrencyDTO(
                         currency.getId(),
                         currency.getName(),
@@ -27,7 +24,6 @@ public class GetAllCurrenciesUseCase {
                         currency.getExchangeRate(),
                         currency.getInflationRate(),
                         currency.getCreatedAt()
-                ))
-                .collect(Collectors.toList());
+                ));
     }
 }
